@@ -1,0 +1,31 @@
+node{
+
+properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5'))])
+
+echo "The Job name is: ${env.JOB_NAME}"
+echo "The Build number is: ${env.BUILD_NUMBER}"
+echo "The node name is : ${env.NODE_NAME}"
+echo "The Jenkins URL is : ${env.JENKINS_URL}"
+echo "The Jenkins home is : ${env.JENKINS_HOME}"
+
+def mavenHome = tool name: 'maven.3.9.9'
+
+stage('CheckOutCode'){
+git branch: 'development', credentialsId: '65295760-845a-489e-be47-49c210539aae', url: 'https://github.com/PallaviB31/maven-web-application.git'
+}
+
+stage('Build'){
+sh "${mavenHome}/bin/mvn clean package"
+}
+
+/*
+stage('SonarQubeReport'){
+sh "${mavenHome}/bin/mvn clean sonar:sonar"
+}
+
+stage('UploadArtifactsIntonexus'){
+sh "${mavenHome}/bin/mvn clean deploy"
+}
+*/
+
+}
