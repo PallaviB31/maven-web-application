@@ -17,14 +17,14 @@ git branch: 'development', credentialsId: '65295760-845a-489e-be47-49c210539aae'
 stage('Build'){
 sh "${mavenHome}/bin/mvn clean package"
 }
-
 /*
 stage('SonarQubeReport'){
 sh "${mavenHome}/bin/mvn clean sonar:sonar"
 }
 
 stage('UploadArtifactsIntonexus'){
-sh "${mavenHome}/bin/mvn clean deploy"
+sh "${mavenHome}/bin/mvn deploy"
+}
 }
 */
 
